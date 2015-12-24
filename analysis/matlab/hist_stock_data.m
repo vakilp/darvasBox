@@ -110,7 +110,7 @@ for i = 1:length(tickers)
 %         ey,'&g=',freq,'&ignore=.csv'));
 
 [temp, status] = urlread(strcat('http://ichart.finance.yahoo.com/table.csv?s='...
-        ,tickers{i},'&a=',em,'&b=',ed,'&c=',ey,'&d=',bm,'&e=',bd,'&f=',by));
+        ,tickers{i},'&a=',bm,'&b=',bd,'&c=',by,'&d=',em,'&e=',ed,'&f=',ey));
     
     % If data was downloaded successfulle, then proceed to process it.
     % Otherwise, ignore this ticker symbol
