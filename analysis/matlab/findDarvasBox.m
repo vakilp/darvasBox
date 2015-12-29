@@ -17,6 +17,7 @@ for i = 2:m
                 Box(idx).enterDate = dateval(i-2);
                 Box(idx).enterIdx = i-2;
                 Box(idx).high = val;
+                Box(idx).boxFormed = 0;
                 val = min(low(i-2:i));
 %                 Box(idx).low = min(low(i-2:i));
                 index = 1;
@@ -31,6 +32,7 @@ for i = 2:m
             index = index+1;
             if index == maxDays
                 Box(idx).low = val;
+                Box(idx).boxFormed = 1;
                 state = 3;
             end
         else
@@ -53,7 +55,20 @@ for i = 2:m
         end
     end
 end
-        
-        
-        
-    
+
+boxFormed = [Box.boxFormed];
+ii = find(boxFormed);
+index = ii(end);
+if ~isempty(index)
+    if(isempty(Box(index).exitDate))
+        end_date = dateval(end);
+    else
+        end_date = Box(index).exitDate;
+    end
+    idx = find(and(dateval>=Box(index).enterDate,dateval<=end_date));
+    std_val = std(stock.Low(idx));
+    stop_loss = Box(index).low-std_val;
+end
+
+val = sprintf('The Stop Loss for %s ought to be %f',stock.Ticker,stop_loss);
+disp(val)
