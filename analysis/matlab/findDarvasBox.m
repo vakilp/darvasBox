@@ -14,11 +14,11 @@ for i = 2:m
         if close(i) <= val
             index = index+1;
             if index==maxDays
-                Box(idx).enterDate = dateval(i-2);
-                Box(idx).enterIdx = i-2;
+                Box(idx).enterDate = dateval(i-maxDays+1);
+                Box(idx).enterIdx = i-maxDays+1;
                 Box(idx).high = val;
                 Box(idx).boxFormed = 0;
-                val = min(low(i-2:i));
+                val = min(low(i-maxDays+1:i));
 %                 Box(idx).low = min(low(i-2:i));
                 index = 1;
                 state = 2;
